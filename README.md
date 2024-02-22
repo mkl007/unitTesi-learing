@@ -1,4 +1,4 @@
-## This is Unit test and end-to-end project to learn how to test projects.
+# This is Unit test and end-to-end project to learn how to test projects.
 
 # Too start the proyect:
 
@@ -8,7 +8,7 @@
 
     npm test
 
-## The project is currently under Commonjs, to use ES6 modules:
+# The project is currently under Commonjs, to use ES6 modules:
 
 1. create 2 files
    # babel.config.js:
