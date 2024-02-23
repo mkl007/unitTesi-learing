@@ -1,18 +1,16 @@
-name: Unit testing
+name: Node.js Package
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
 
 jobs:
-  hello_world:
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Echo the message
-        run: |
-          echo "Hola Mundo!"
-      - name: Install dependencies
-        run: npm install
-      - name: run test
-        run: npm test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm test
