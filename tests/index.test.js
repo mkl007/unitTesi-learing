@@ -47,7 +47,7 @@
 const request = require('supertest');
 const { app } = require('../index');
 
-describe('GET /users', () => {
+describe('GET /user', () => {
   let server;
 
   beforeAll(done => {
@@ -79,7 +79,7 @@ describe('GET /users', () => {
   });
 
   it('responds with json', async () => {
-    const response = await request(server).get('/users');
+    const response = await request(server).get('/user');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ name: 'john' });
   });
