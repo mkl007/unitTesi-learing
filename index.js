@@ -1,14 +1,16 @@
-const express = require('express')
+const express = require('express');
 const app = express();
 
-
 app.get('/user', function (req, res) {
-    console.log({ name: 'john' })
     res.status(200).json({ name: 'john' });
 });
 
+const server = app.listen(3001, () => {
+});
 
-app.listen(3001, () => {
-    console.log('connected')
-})
-module.exports = { app };
+// Add a close method to the app object to enable closing the server
+app.close = function(callback) {
+  server.close(callback);
+};
+
+module.exports = { app, server }; // Export the `server` instance along with `app`
