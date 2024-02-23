@@ -1,0 +1,19 @@
+name: Unit testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Echo the message
+        run: |
+          echo "Hola Mundo!"
+      - name: Dime la fecha
+        run: date
+      - run: ls -l
+      - name: run test
+        run: npm test
