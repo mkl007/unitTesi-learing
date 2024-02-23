@@ -23,7 +23,7 @@ describe('GET /user', () => {
 
   beforeAll(() => {
     server = app.listen(3001, () => {
-      console.log('connected');
+      console.log('connected here');
     });
   });
 
