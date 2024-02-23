@@ -27,12 +27,11 @@ describe('GET /user', () => {
     });
   });
 
-   server.on('error', error => {
-      if (error.code === 'EADDRINUSE') {
-        console.error(`Port ${port} is already in use`);
-        process.exit(1); // Exit the test with failure
-      }
-    });
+  server.on('error', error => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`Port ${port} is already in use`);
+      process.exit(1); // Exit the test with failure
+    }
   });
 
   afterAll(done => {
