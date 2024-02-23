@@ -12,8 +12,7 @@ jobs:
       - name: Echo the message
         run: |
           echo "Hola Mundo!"
-      - name: Dime la fecha
-        run: date
-      - run: ls -l
+      - name: Install dependencies
+        run: npm install
       - name: run test
         run: npm test
