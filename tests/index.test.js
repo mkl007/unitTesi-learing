@@ -58,7 +58,7 @@ describe('GET /user', () => {
     });
 
     if (!server) {
-      console.error('Failed to start the server');
+      console.error('Failed to start the server yes');
       process.exit(1);
     }
 
