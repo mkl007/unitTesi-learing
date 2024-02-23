@@ -78,7 +78,7 @@ describe('GET /user', () => {
     }
   });
 
-  it('responds with json', async (done) => {
+  it('responds with json', async () => {
     const response = await request(server).get('/user');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ name: 'john' });
