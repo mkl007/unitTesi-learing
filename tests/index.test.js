@@ -82,6 +82,6 @@ describe('GET /user', () => {
     const response = await request(server).get('/user');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ name: 'john' });
-    response.end(done)
+    done();
   });
 });
