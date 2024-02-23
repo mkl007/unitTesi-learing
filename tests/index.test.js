@@ -17,13 +17,44 @@
 
 // tests/index.test.js
 const request = require('supertest');
-const { app } = require('../index'); // Assuming your Express app is exported from index.js
+const { app } = require('../index');
 
-describe('GET /user', () => {
-  test('responds with json', async () => {
-    const response = await request(app).get('/user');
+describe('GET /users', () => {
+  let server;
+
+  beforeAll(done => {
+    const port = 3000;
+    server = app.listen(port, () => {
+      console.log('connected here');
+      done();
+    });
+
+    if (!server) {
+      console.error('Failed to start the server');
+      process.exit(1);
+    }
+
+    server.on('error', error => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${port} is already in use`);
+        process.exit(1); // Exit the test with failure
+      }
+    });
+  });
+
+  afterAll(done => {
+    if (server) {
+      server.close(done);
+    } else {
+      done();
+    }
+  });
+
+  it('responds with json', async () => {
+    const response = await request(server).get('/users');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ name: 'john' });
+    done();
   });
 });
 
