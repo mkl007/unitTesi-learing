@@ -15,31 +15,71 @@
 // });
 
 
+// const request = require('supertest');
+// const { app } = require('../index');
+
+// describe('GET /user', () => {
+//   let server;
+
+//   beforeAll(() => {
+//     server = app.listen(3001, () => {
+//       console.log('connected here');
+//     });
+//   });
+
+//   server.on('error', error => {
+//     if (error.code === 'EADDRINUSE') {
+//       console.error(`Port ${port} is already in use`);
+//       process.exit(1); // Exit the test with failure
+//     }
+//   });
+
+//   afterAll(done => {
+//     server.close(done);
+//   });
+
+//   it('responds with json', async () => {
+//     const response = await request(server).get('/user');
+//     expect(response.status).toBe(200);
+//     expect(response.body).toEqual({ name: 'john' });
+//   });
+// });
 const request = require('supertest');
 const { app } = require('../index');
 
-describe('GET /user', () => {
+describe('GET /users', () => {
   let server;
 
-  beforeAll(() => {
-    server = app.listen(3001, () => {
+  beforeAll(done => {
+    const port = 3001;
+    server = app.listen(port, () => {
       console.log('connected here');
+      done();
+    });
+
+    if (!server) {
+      console.error('Failed to start the server');
+      process.exit(1);
+    }
+
+    server.on('error', error => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${port} is already in use`);
+        process.exit(1); // Exit the test with failure
+      }
     });
   });
 
-  server.on('error', error => {
-    if (error.code === 'EADDRINUSE') {
-      console.error(`Port ${port} is already in use`);
-      process.exit(1); // Exit the test with failure
+  afterAll(done => {
+    if (server) {
+      server.close(done);
+    } else {
+      done();
     }
   });
 
-  afterAll(done => {
-    server.close(done);
-  });
-
   it('responds with json', async () => {
-    const response = await request(server).get('/user');
+    const response = await request(server).get('/users');
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ name: 'john' });
   });
