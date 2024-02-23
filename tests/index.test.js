@@ -51,7 +51,7 @@ describe('GET /users', () => {
   let server;
 
   beforeAll(done => {
-    const port = 3001;
+    const port = 3000;
     server = app.listen(port, () => {
       console.log('connected here');
       done();
